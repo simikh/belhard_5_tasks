@@ -10,8 +10,21 @@
 
 
 def common_and_longest(text: str) -> tuple:
-    common = None
-    longest = None
+    words = text.split(" ")
+    counter = {}
+    for word in words:
+        current_value = counter.setdefault(word, 0)
+        counter[word] = current_value + 1
+
+    common = words[0]
+    for key, value in counter.items():
+        if value > counter[common]:
+            common = key
+
+    longest = words[0]
+    for i in counter.keys():
+        if len(i) > len(longest):
+            longest = i
     return common, longest
 
 
